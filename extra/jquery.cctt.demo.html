@@ -69,7 +69,7 @@
         $('.cctt').cctt()
 
         // examples of script constructed
-        if (false) {
+        if (true) {
             const C = c => td({class:'cctt-control'}, c)
             const c = c => td(                        c)
             const x = td()
@@ -78,7 +78,7 @@
             const Y = cs => tr({class:'cctt-collapsed'}, cs)            
             const h = cs => tr({style:{display:'none'}}, cs)
 
-            $('#fill-with-table').html(table({id:'t-cctt', class:'cctt'}, [
+            $('#fill-with-table').append(table({id:'t-cctt', class:'cctt'}, [
                 Y([C('A'),c('B'),c('C')]),
                  h([x,C('B'),c('C')]),
                  h(['','B','C'].map(td)),
@@ -88,22 +88,24 @@
                  h(['','B','C'].map(td)),
                  h(['','B','C'].map(td)),
             ]))
-        } else {
+            $('#t-cctt').cctt()
+        }
+        if (true) {
+            /*
             const ctrl = {class:'cctt-control'}
             const expn = {class:'cctt-expanded'}
             const coll = {class:'cctt-collapsed'}
             const hide = {style:{display:'none'}}
-            
-            $('#fill-with-table').html(table({id:'t-cctt', class:'cctt'}, [
+            */
+            $('#fill-with-table').append(table({class:'cctt'}, [
                 tr({class:'cctt-collapsed'}, [td({class:'cctt-control'},  1),td( 2),td( 3)]),
                 tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
                 tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
                 tr({class:'cctt-collapsed'}, [td({class:'cctt-control'},  1),td( 2),td( 3)]),
                 tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
                 tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
-            ]))
+            ]).cctt())
         }
-        $('#t-cctt').cctt()
     })
     
 </script>

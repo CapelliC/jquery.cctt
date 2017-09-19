@@ -1,0 +1,33 @@
+/*
+ * Handle multilevel folding of TABLE
+ * 
+ * A TR with class 'expanded' or 'collapsed' gets
+ *  a fold-state indicator in TD with class 'control'
+ *  and related behaviour
+ * 
+ * There are performance considerations that hint to avoid visibility
+ *  tests so this assumption is done: the table need to be entirely
+ *  visible, except bodies
+ * 
+ * author: Capelli Carlo
+ * license: MIT
+ */
+
+.cctt tr.cctt-expanded td.cctt-control::before {
+    content: url(collapse.png)
+}
+.cctt tr.cctt-collapsed td.cctt-control::before {
+    content: url(expand.png)
+}
+
+/* support for WordPress options page as a set
+ * of foldable sections
+ */
+h2.cctt-expanded::before {
+    content: url(collapse.png)
+}
+h2.cctt-collapsed::before {
+    content: url(expand.png)
+}
+
+.cctt th, .cctt td { padding: 1px; }

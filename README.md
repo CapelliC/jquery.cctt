@@ -1,2 +1,3 @@
 # jquery.cctt
-jQuery plugin for structured (collapsible) tables, and WordPress support
+
+cc tree table: jQuery plugin for structured and interactive tables, and basic WordPress support.

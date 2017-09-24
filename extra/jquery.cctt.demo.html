@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--
- * Author: CapelliC
+ * author: Capelli Carlo
+ * license: MIT
 -->
 <html>
 <head>
@@ -11,11 +12,14 @@
 
     <link rel="stylesheet" href="../jquery.cctt.css">
     <script src="../jquery.cctt.js"></script>
+    
+    <script src="html_uty.js"></script>
 </head>
 
 <p>
     First, an html table with manually expressed structure.
-    Visibility should be coherent (stay correct!).
+    Rows visibility should be coherent.
+    If collapsed, following branch rows should be hidden.
 </p>
 
 <table class='cctt'>
@@ -54,22 +58,37 @@
 </table>
 
 <p>Next, a script constructed one.</p>
+<div id='fill-with-table-1'></div>
 
-<div id='fill-with-table'></div>
+<p>Another one, slightly different style.</p>
+<div id='fill-with-table-2'></div>
+
+<p>And now, let's CCTT handle structure initialization, guessing from data.</p>
+<div id='fill-with-table-3'></div>
 
 <script>
 
     const trace = console.log
 
     // get some DOM jQuery utilities
-    $.getScript('html_uty.js')
+    /*
+    trace(window.location)
+    const l = ''+window.location
+    var v = l.split('/')
+    v[v.length-1] = 'html_uty.js'
+    const s = v.join('/')
+    trace('s', s)
+    $.getScript(s)
+    */
+    //$.getScript('html_uty.js', (r,s) => trace('getScript', r, s))
     
     $(function() {
         
-        $('.cctt').cctt()
+        if (false)
+            $('.cctt').cctt()
 
         // examples of script constructed
-        if (true) {
+        if (false) {
             const C = c => td({class:'cctt-control'}, c)
             const c = c => td(                        c)
             const x = td()
@@ -78,7 +97,7 @@
             const Y = cs => tr({class:'cctt-collapsed'}, cs)            
             const h = cs => tr({style:{display:'none'}}, cs)
 
-            $('#fill-with-table').append(table({id:'t-cctt', class:'cctt'}, [
+            $('#fill-with-table-1').append(table({id:'t-cctt', class:'cctt'}, [
                 Y([C('A'),c('B'),c('C')]),
                  h([x,C('B'),c('C')]),
                  h(['','B','C'].map(td)),
@@ -90,21 +109,29 @@
             ]))
             $('#t-cctt').cctt()
         }
-        if (true) {
-            /*
-            const ctrl = {class:'cctt-control'}
-            const expn = {class:'cctt-expanded'}
-            const coll = {class:'cctt-collapsed'}
-            const hide = {style:{display:'none'}}
-            */
-            $('#fill-with-table').append(table({class:'cctt'}, [
+
+        if (false) {
+            $('#fill-with-table-2').html(table({class:'cctt'}, [
                 tr({class:'cctt-collapsed'}, [td({class:'cctt-control'},  1),td( 2),td( 3)]),
-                tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
-                tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
-                tr({class:'cctt-collapsed'}, [td({class:'cctt-control'},  1),td( 2),td( 3)]),
-                tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
-                tr({style:{display:'none'}}, [td(                          ),td(20),td(30)]),
+                tr({style:{display:'none'}}, [td(                          ),td(12),td(13)]),
+                tr({style:{display:'none'}}, [td(                          ),td(14),td(15)]),
+                tr({class:'cctt-collapsed'}, [td({class:'cctt-control'},  2),td( 2),td( 3)]),
+                tr({style:{display:'none'}}, [td(                          ),td(22),td(23)]),
+                tr({style:{display:'none'}}, [td(                          ),td(24),td(25)]),
             ]).cctt())
+        }
+
+        if (true) {
+
+            const t = table([
+                ['a','b','c'].map(th),
+                [ 1,  2,  3 ].map(td),
+                [ 1,  2, 13 ].map(td),
+                [ 1,  3, 14 ].map(td),
+                [ 1,  3, 15 ].map(td),
+            ].map(tr))
+            $('#fill-with-table-3').append(t)
+            $(t).cctt('structure_layout', t)
         }
     })
     

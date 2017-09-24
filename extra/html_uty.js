@@ -1,9 +1,9 @@
 /*
- * jQuery based declarative JS HTML helpers
+ * jQuery based HTML helpers
  * 
- * Author: CapelliC
- * License: @metamatter.nl
-*/
+ * author: Capelli Carlo
+ * license: MIT
+ */
 
 function keys_css(S) {
     var G = {}

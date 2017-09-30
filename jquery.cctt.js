@@ -183,6 +183,7 @@ trace('row_tree', this, TR)
     
     // standard dispatch of method
     $.fn.cctt = function(method) {
+trace('$.fn.cctt')
         if (methods[method]) {
             if (arguments.length == 1)  // 
                 return methods[method]

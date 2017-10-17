@@ -85,8 +85,11 @@ trace('row_tree', this, TR)
             
             // use event delegation to deal with toggling classes
             // suggestion by http://stackoverflow.com/a/16547457/874024
-            TBODY.on('click', '.cctt-control', function() {
+            TBODY.on('click', '.cctt-control', function(e) {
 
+                if (methods.settings.stop_propagation)
+                    e.stopPropagation()
+                    
                 var TD = $(this)
                 var TR = $(TD.parent())
 
@@ -142,7 +145,6 @@ trace('row_tree', this, TR)
                     ac = top().action
                 })
                 
-                
                 TR.toggleClass('cctt-expanded cctt-collapsed')
             })
         },
@@ -195,6 +197,8 @@ trace('$.fn.cctt')
     }
 
     $.fn.cctt.defaults = {
+        // stop propagation on expand/collapse event
+        stop_propagation: true,
     }
     
 })(jQuery);

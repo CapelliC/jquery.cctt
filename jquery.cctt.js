@@ -269,6 +269,7 @@ trace('ensure_visible', $el, $ps)
 
         // utility currency
         // from https://stackoverflow.com/a/29347112/874024
+        /*
         parsePotentiallyGroupedFloat : function(value) {
             if (typeof value === 'string') {
                 var result = (value = value.trim()).replace(/[^0-9]/g, '')
@@ -297,6 +298,36 @@ trace('ensure_visible', $el, $ps)
         },
         setcurrency: function(field, c) {
             $(field).val($().cctt('fmtcurrency', c))
+        },
+        */
+        parsePotentiallyGroupedFloat : function(value) {
+            if (typeof value === 'string') {
+                var result = (value = value.trim()).replace(/[^0-9]/g, '')
+                if (/[,\.]\d{2}$/.test(value))
+                    result = result.replace(/(\d{2})$/, '.$1')
+                return parseFloat(result)
+            }
+            return parseFloat(value)
+        },
+        
+        currency: function(field) {
+            var s = $(field).val().trim()
+            if (s.length > 0)
+                return methods.parsePotentiallyGroupedFloat(s)
+            return 0;
+        },
+        
+        fmtcurrency: function(c) {
+            var R = methods.parsePotentiallyGroupedFloat(c).toLocaleString('it-IT', {maximumFractionDigits:2, minimumFractionDigits:2})
+            return R
+        },
+        euros: function(field) {
+            var c = methods.currency(field)
+            var f = methods.fmtcurrency(c)
+            return f + " €"
+        },
+        setcurrency: function(field, c) {
+            $(field).val(methods.fmtcurrency(c))
         },
         
     }

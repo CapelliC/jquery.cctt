@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>jQuery CCTT Demo</title>
+    <title>jQuery.cctt Demo</title>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
@@ -66,8 +66,8 @@
 <p>With different style.</p>
 <div id='fill-with-table-2'></div>
 
-<h3>TBD</h3>
-<p>Let CCTT to handle structure, guessing from data.</p>
+<!-- h3>TBD</h3 -->
+<p>Let CCTT to handle structure, guessing from records' stream.</p>
 <p>This schema is important: it correspond to join and selection by ordered PK.</p>
 <div id='fill-with-table-3'></div>
 
@@ -85,12 +85,14 @@
     trace('s', s)
     $.getScript(s)
     */
+    //$.ajaxSetup({isLocal: true})
     //$.getScript('html_uty.js', (r,s) => trace('getScript', r, s))
     
     $(function() {
+        //$.getScript('html_uty.js', (r, s) => console.log('getScript', r, s))
         
-        if (true)
-            $('.cctt').cctt()
+        // connect to tables having class 'cctt'
+        $('.cctt').cctt()
 
         // examples of script constructed
         if (true) {
@@ -137,19 +139,37 @@
                 tr({style:{display:'none'}}, [td(                          ),td(22),td(23)]),
                 tr({style:{display:'none'}}, [td(                          ),td(24),td(25)]),
             ]).cctt())
+            
+            const cctt = $().cctt
+            trace('cctt', cctt)
+            
+            var cell = $('#fill-with-table-2 td:contains("25")')
+            trace('cell', cell)
+              var par = cctt('find_parents', cell)
+            trace('par', par)
+
+            cctt('ensure_visible', cell)
+            /*
+function scrollIntoView(element, container) {
+    container.scrollTop(element.position().top)
+}
+            */
         }
 
         if (true) {
 
-            const t = table([
+            const t = table({class:'cctt'}, [
                 ['a','b', 'c' ].map(th),
                 [ 1,   1, 111 ].map(td),
                 [ 1,  11, 111 ].map(td),
                 [ 2,   2, 222 ].map(td),
                 [ 2,  22, 222 ].map(td),
             ].map(tr))
-            $('#fill-with-table-3').append(t)
-            $('#fill-with-table-3 table').cctt('structure_layout', t)
+            const x = $('#fill-with-table-3').append(t)
+            const y = $('#fill-with-table-3 table').cctt() //'structure_layout', t)
+            const z = $('#fill-with-table-3 table').cctt('structure_layout')
+            trace('xyz', x, y, z)
+            z()
         }
     })
     

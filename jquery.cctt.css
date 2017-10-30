@@ -30,4 +30,11 @@ h2.cctt-collapsed::before {
     content: url(expand.png)
 }
 
+h3.cctt-expanded::before {
+    content: url(collapse.png)
+}
+h3.cctt-collapsed::before {
+    content: url(expand.png)
+}
+
 .cctt th, .cctt td { padding: 1px; }

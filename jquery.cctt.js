@@ -164,7 +164,7 @@ trace('row_tree', this, TR)
 
         // 
         toggle_node: function(TD) {
-trace('toggle_node', TD)
+//trace('toggle_node', TD)
             var state = { skip: 0, hide: 1, show: 2 }
             
             var TR = $(TD.parent())
@@ -233,7 +233,7 @@ trace('toggle_node', TD)
         // expand required branches to make element $el visible
         ensure_visible : function($el) {
             const $ps = methods.find_parents($el).reverse()
-trace('ensure_visible', $el, $ps)
+//trace('ensure_visible', $el, $ps)
             $ps.forEach($tr => {
                 if ($tr.is(k_col))
                     methods.toggle_node(methods.find_control_td($tr))

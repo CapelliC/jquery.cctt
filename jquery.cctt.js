@@ -222,6 +222,9 @@ trace('row_tree', this, TR)
             })
             
             TR.toggleClass('cctt-expanded cctt-collapsed')
+
+            // use custom event to notify of state change
+            TR.trigger('cctt:toggle')
         },
         
         // find - if any - the first TD tagged as control cell
